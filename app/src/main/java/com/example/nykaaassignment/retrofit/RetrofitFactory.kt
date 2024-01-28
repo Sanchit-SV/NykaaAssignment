@@ -1,4 +1,4 @@
-package com.example.nykaaassignment
+package com.example.nykaaassignment.retrofit
 
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson

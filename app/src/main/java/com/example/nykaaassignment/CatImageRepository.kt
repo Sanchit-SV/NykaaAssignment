@@ -1,5 +1,6 @@
 package com.example.nykaaassignment
 
+import com.example.nykaaassignment.retrofit.CatImageService
 import retrofit2.Response
 
 class CatImageRepository (
@@ -9,7 +10,8 @@ class CatImageRepository (
 
     suspend fun getImages() : Response<ArrayList<CatImageResponse>>{
 
-        return catImageService.getCatImages()
+        val response = catImageService.getCatImages()
+        return response
     }
 
 

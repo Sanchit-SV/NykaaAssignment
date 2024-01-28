@@ -20,14 +20,20 @@ class CatImageViewModel (
         catImageDataState.postValue( CatResponseState.Loading)
 
         viewModelScope.launch {
-            val catImagesRes = catImageRepository.getImages()
 
-            catImagesRes.apply {
-                if(isSuccessful && body()?.isNotEmpty() == true) {
-                    catImageDataState.postValue(CatResponseState.Success(body()!!))
-                } else {
-                    catImageDataState.postValue(CatResponseState.Error(errorBody()?.string()?:message()))
+            try {
+                val catImagesRes = catImageRepository.getImages()
+
+                catImagesRes.apply {
+                    if(isSuccessful && body()?.isNotEmpty() == true) {
+                        catImageDataState.postValue(CatResponseState.Success(body()!!))
+                    } else {
+                        catImageDataState.postValue(CatResponseState.Error(errorBody()?.string()?:message()))
+                    }
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                catImageDataState.postValue(CatResponseState.Error(e.message.toString()))
             }
 
         }
